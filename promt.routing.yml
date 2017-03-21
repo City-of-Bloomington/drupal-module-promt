@@ -1,0 +1,7 @@
+promt.programs:
+  path: '/promt/programs'
+  defaults:
+    _controller: '\Drupal\promt\Controller\PromtController::programs'
+    _title: 'Programs'
+  requirements:
+    _permission: 'access content'

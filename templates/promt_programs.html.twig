@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Displays a list of Parks and Rec Programs
+ *
+ * Available variables
+ * - programs: The programs JSON data from Promt
+ *
+ * @copyright 2017 City of Bloomington, Indiana
+ * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
+ */
+#}
+<section>
+    <header><h2>Programs</h2></header>
+    <div class="container">
+    {% for p in programs.programs %}
+        <article>
+            <header>
+                <h3>{{ p.title }}</h3>
+            </header>
+            <div><p>{{ p.statement }}</p></div>
+        </article>
+    {% endfor %}
+    </div>
+</section>
