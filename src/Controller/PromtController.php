@@ -19,4 +19,9 @@ class PromtController extends ControllerBase
             '#programs' => $programs
         ];
     }
+
+    public function program($id)
+    {
+
+    }
 }

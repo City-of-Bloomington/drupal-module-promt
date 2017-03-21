@@ -9,13 +9,27 @@ use Drupal\Core\Site\Settings;
 
 class PromtService
 {
-    public static function programs()
+    private static function getUrl()
     {
-        $PROMT = Settings::get('promt_url');
-        $url = $PROMT.'/PromtService';
-
+        $config = \Drupal::config('promt.settings');
+        return $config->get('promt_url');
+    }
+    private static function doJsonQuery($url)
+    {
         $client = \Drupal::httpClient();
         $response = $client->get($url);
         return json_decode($response->getBody(), true);
+    }
+
+    public static function programs()
+    {
+        $url = self::getUrl().'/PromtService';
+        return self::doJsonQuery($url);
+    }
+
+    public static function program($id)
+    {
+        $url = self::getUrl().'/PromtService';
+        return self::doJsonQuery($url);
     }
 }
