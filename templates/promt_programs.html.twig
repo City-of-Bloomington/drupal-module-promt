@@ -12,8 +12,9 @@
 #}
 <section>
     <header><h2>Programs</h2></header>
+    {{ form }}
     <div class="container">
-    {% for p in programs.programs %}
+    {% for p in programs %}
         <article>
             <header>
                 <h3>{{ p.title }}</h3>

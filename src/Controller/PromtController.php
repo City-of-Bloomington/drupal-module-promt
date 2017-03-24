@@ -6,22 +6,39 @@
 namespace Drupal\promt\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Form\FormState;
 use Drupal\promt\PromtService;
 
 class PromtController extends ControllerBase
 {
     public function programs()
     {
-        $programs = PromtService::programs();
+        $form_state = new FormState();
+        $form_state->setAlwaysProcess(true);
+        $form_state->setRebuild(true);
 
+        if (!empty($_GET['category_id'])) { $form_state->set('category_id', (int)$_GET['category_id']); }
+        if (!empty($_GET['location_id'])) { $form_state->set('location_id', (int)$_GET['location_id']); }
+        if (!empty($_GET['ageGroup'   ])) { $form_state->set('ageGroup'   ,      $_GET['ageGroup'   ]); }
+
+        $form = \Drupal::formBuilder()->buildForm('Drupal\promt\Form\ProgramSearchForm', $form_state);
+
+        $programs = PromtService::programs($_GET);
         return [
-            '#theme'    => 'promt_programs',
-            '#programs' => $programs
+            '#theme'      => 'promt_programs',
+            '#form'       => $form,
+            '#programs'   => $programs
         ];
     }
 
     public function program($id)
     {
+        $program = PromtService::program($id);
+
+        return [
+            '#theme'   => 'promt_program',
+            '#program' => $program
+        ];
 
     }
 }

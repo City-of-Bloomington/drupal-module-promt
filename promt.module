@@ -28,7 +28,8 @@ function promt_theme()
         'promt_programs'=> [
             'template' => 'promt_programs',
             'variables' => [
-                'programs'=>null
+                'form'     => null,
+                'programs' => null
             ]
         ]
     ];

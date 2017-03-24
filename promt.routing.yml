@@ -16,8 +16,8 @@ promt.program:
 promt.programs:
   path: '/promt/programs'
   defaults:
-    _controller: '\Drupal\promt\Controller\PromtController::programs'
     _title: 'Programs'
+    _controller: '\Drupal\promt\Controller\PromtController::programs'
   requirements:
     _permission: 'access content'
 ...
