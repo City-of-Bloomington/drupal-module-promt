@@ -33,12 +33,12 @@ class PromtController extends ControllerBase
 
     public function program($id)
     {
-        $program = PromtService::program($id);
+        $program = PromtService::program((int)$id);
 
         return [
             '#theme'   => 'promt_program',
-            '#program' => $program
+            '#program' => $program,
+            '#title'   => $program['title']
         ];
-
     }
 }

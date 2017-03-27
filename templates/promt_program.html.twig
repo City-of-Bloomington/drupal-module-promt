@@ -10,3 +10,19 @@
  * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
  */
 #}
+<div><p>{{ program.statement }}</p></div>
+{% if program.sessions %}
+<table>
+    {% for s in program.sessions %}
+    <tr><td>{{ s.code }}</td>
+        <td>{{ s.days }}</td>
+        <td>{{ s.start_date }} - {{ s.end_date }}</td>
+        <td>{{ s.start_end_time }}</td>
+        <td>{{ s.in_city_fees }}</td>
+        <td>{{ s.non_city_fees }}</td>
+        <td>{{ s.participant_age }}</td>
+        <td>{{ s.description }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}

@@ -45,6 +45,7 @@ class ProgramSearchForm extends FormBase
 
         $ageGroups = PromtService::ageGroups();
         $options   = [];
+        foreach ($ageGroups as $a) { $options[$a] = $a; }
         $form['ageGroup'] = [
             '#type'         => 'select',
             '#title'        => 'Age Group',

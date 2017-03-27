@@ -42,48 +42,32 @@ class PromtService
                 $search[$promtField] = $fields[$drupalField];
             }
         }
-        $params = $search ? '?'.http_build_query($search) : '';
-        $url = self::getUrl().'/PromtService'.$params;
-        $res = self::doJsonQuery($url);
-        if (!empty($res['programs'])) {
-            return $res['programs'];
-        }
-        return [];
+        $params   = $search ? '?'.http_build_query($search) : '';
+        $url      = self::getUrl().'/PromtService'.$params;
+        return self::doJsonQuery($url);
     }
 
     public static function program($id)
     {
-        $url = self::getUrl().'/PromtService';
+        $url = self::getUrl().'/PromtService?program_id='.$id;
         return self::doJsonQuery($url);
     }
 
     public static function locations()
     {
         $url = self::getUrl().'/PromtService?list_type=locations';
-        $res = self::doJsonQuery($url);
-        if (!empty($res['locations'])) {
-            return $res['locations'];
-        }
-        return [];
+        return self::doJsonQuery($url);
     }
 
     public static function categories()
     {
         $url = self::getUrl().'/PromtService?list_type=categories';
-        $res = self::doJsonQuery($url);
-        if (!empty($res['categories'])) {
-            return $res['categories'];
-        }
-        return [];
+        return self::doJsonQuery($url);
     }
 
     public static function ageGroups()
     {
         $url = self::getUrl().'/PromtService?list_type=age_groups';
-        $res = self::doJsonQuery($url);
-        if (!empty($res['age groups'])) {
-            return $res['age groups'];
-        }
-        return [];
+        return self::doJsonQuery($url);
     }
 }
