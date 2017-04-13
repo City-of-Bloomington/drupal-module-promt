@@ -25,6 +25,13 @@ function promt_help($route_name, RouteMatchInterface $route_match)
 function promt_theme()
 {
     return [
+        'promt_search'=> [
+            'template' => 'promt_search',
+            'variables' => [
+                'form'    => null,
+                'results' => null
+            ]
+        ],
         'promt_program' => [
             'template' => 'promt_program',
             'variables' => [
@@ -34,7 +41,6 @@ function promt_theme()
         'promt_programs'=> [
             'template' => 'promt_programs',
             'variables' => [
-                'form'     => null,
                 'programs' => null
             ]
         ]

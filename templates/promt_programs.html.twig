@@ -10,17 +10,13 @@
  * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
  */
 #}
-<section>
-    <header><h2>Programs</h2></header>
-    {{ form }}
-    <div class="container">
+<div class="promt_programs">
     {% for p in programs %}
-        <article>
-            <header>
-                <h3><a href="{{ path('promt.program', {'id': p.id}) }}">{{ p.title }}</a></h3>
-            </header>
-            <div><p>{{ p.statement }}</p></div>
-        </article>
+    <article>
+        <a href="{{ path('promt.program', {'id': p.id}) }}">
+            <header><h3>{{ p.title }}</h3></header>
+            <p>{{ p.statement }}</p>
+        </a>
+    </article>
     {% endfor %}
-    </div>
-</section>
+</div>

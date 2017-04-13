@@ -25,9 +25,9 @@ class PromtController extends ControllerBase
 
         $programs = PromtService::programs($_GET);
         return [
-            '#theme'      => 'promt_programs',
-            '#form'       => $form,
-            '#programs'   => $programs
+            '#theme'   => 'promt_search',
+            '#form'    => $form,
+            '#results' => $programs
         ];
     }
 
