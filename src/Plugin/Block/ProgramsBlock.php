@@ -52,7 +52,7 @@ class ProgramsBlock extends BlockBase implements BlockPluginInterface
             '#type'          => 'select',
             '#title'         => 'Type',
             '#description'   => 'Which promt ID field to query on',
-            '#options'       => ['Category', 'Location'],
+            '#options'       => ['category_id'=>'Category', 'location_id'=>'Location'],
             '#default_value' => isset($config['fieldtype']) ? $config['fieldtype'] : '',
             '#required'      => true
         ];
