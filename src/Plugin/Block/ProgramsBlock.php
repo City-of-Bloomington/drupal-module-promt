@@ -14,7 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * @Block(
  *     id = "promt_programs_block",
- *     admin_label = "Prompt Programs",
+ *     admin_label = "Promt Programs",
  *     context = {
  *         "node" = @ContextDefinition("entity:node")
  *     }
