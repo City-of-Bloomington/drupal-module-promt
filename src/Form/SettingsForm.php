@@ -38,6 +38,12 @@ class SettingsForm extends ConfigFormBase
             '#title'         => 'PROMT Url',
             '#default_value' => $config->get('promt_url')
         ];
+        $form['promt_breadcrumb'] = [
+            '#type'          => 'textfield',
+            '#title'         => 'Breadcrumbs',
+            '#default_value' => $config->get('promt_breadcrumb'),
+            '#description'   => 'Enter node IDs, separated by commas, to be used as the base breadcrumb for Promt routes'
+        ];
 
         return parent::buildForm($form, $form_state);
     }
@@ -48,7 +54,8 @@ class SettingsForm extends ConfigFormBase
     public function submitForm(array &$form, FormStateInterface $form_state)
     {
         $this->config('promt.settings')
-             ->set('promt_url', $form_state->getValue('promt_url'))
+             ->set('promt_url',        $form_state->getValue('promt_url'))
+             ->set('promt_breadcrumb', $form_state->getValue('promt_breadcrumb'))
              ->save();
 
         parent::submitForm($form, $form_state);
