@@ -17,7 +17,7 @@ class PromtService
      * $fields[ drupal_field => promt_field ]
      */
     public static $fields = [
-        'category_id' => 'category',
+        'category_id' => 'category_id',
         'location_id' => 'location_id',
         'ageGroup'    => 'age'
     ];
@@ -27,11 +27,20 @@ class PromtService
         $config = \Drupal::config('promt.settings');
         return $config->get('promt_url');
     }
+
+    /**
+     * @param  string $url
+     * @return array        The JSON data
+     */
     private static function doJsonQuery($url)
     {
-        $client = \Drupal::httpClient();
-        $response = $client->get($url);
-        return json_decode($response->getBody(), true);
+        $client   = \Drupal::httpClient();
+        $response = $client->request('GET', $url);
+        $json     = json_decode($response->getBody(), true);
+        if (!$json) {
+            throw new \Exception(json_last_error_msg());
+        }
+        return $json;
     }
 
     public static function programs(array $fields=null)
@@ -44,7 +53,8 @@ class PromtService
         }
         $params   = $search ? '?'.http_build_query($search) : '';
         $url      = self::getUrl().'/PromtService'.$params;
-        return self::doJsonQuery($url);
+        $programs = self::doJsonQuery($url);
+        return $programs;
     }
 
     public static function program($id)
