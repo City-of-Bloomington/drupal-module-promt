@@ -30,7 +30,7 @@ class BreadcrumbBuilder implements BreadcrumbBuilderInterface
     public function applies(RouteMatchInterface $route_match)
     {
         $name = explode('.', $route_match->getRouteName());
-        return $name[0] == 'promt';
+        return ($name[0]=='promt' && $name[1]!='settings');
     }
 
     public function build(RouteMatchInterface $route_match)
