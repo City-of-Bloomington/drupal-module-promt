@@ -38,7 +38,10 @@ class PromtService
         $response = $client->request('GET', $url);
         $json     = json_decode($response->getBody(), true);
         if (!$json) {
-            throw new \Exception(json_last_error_msg());
+            $err = json_last_error();
+            if ($err !== JSON_ERROR_NONE) {
+                throw new \Exception(json_last_error_msg());
+            }
         }
         return $json;
     }
