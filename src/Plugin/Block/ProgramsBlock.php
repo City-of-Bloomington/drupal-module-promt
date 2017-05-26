@@ -34,11 +34,12 @@ class ProgramsBlock extends BlockBase implements BlockPluginInterface
             $id = $node->get($fieldname)->value;
             if ($id) {
                 $programs = PromtService::programs([$fieldtype=>$id]);
-
-                return [
-                    '#theme'    => 'promt_programs',
-                    '#programs' => $programs
-                ];
+                if ($programs) {
+                    return [
+                        '#theme'    => 'promt_programs',
+                        '#programs' => $programs
+                    ];
+                }
             }
         }
     }
