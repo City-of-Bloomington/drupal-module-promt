@@ -15,7 +15,9 @@
     <article>
         <a href="{{ path('promt.program', {'id': p.id}) }}">
             <header><h3>{{ p.title }}</h3></header>
-            <p>{{ p.statement }}</p>
+            {% if p.summary %}
+            <p>{{ p.summary }}</p>
+            {% endif %}
         </a>
     </article>
     {% endfor %}
