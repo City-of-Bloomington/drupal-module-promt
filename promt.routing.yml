@@ -6,18 +6,6 @@ promt.settings:
     _title: 'PROMT Settings'
   requirements:
     _permission: 'administer site configuration'
-promt.program:
-  path: '/promt/programs/{id}'
-  defaults:
-    _controller: '\Drupal\promt\Controller\PromtController::program'
-    _title: 'Program'
-  requirements:
-    _permission: 'access content'
-promt.programs:
-  path: '/promt/programs'
-  defaults:
-    _title: 'Programs'
-    _controller: '\Drupal\promt\Controller\PromtController::programs'
-  requirements:
-    _permission: 'access content'
+route_callbacks:
+  - '\Drupal\promt\Routing\Routes::routes'
 ...
