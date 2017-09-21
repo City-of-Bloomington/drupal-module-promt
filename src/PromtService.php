@@ -63,7 +63,20 @@ class PromtService
     public static function program($id)
     {
         $url = self::getUrl().'/PromtService?program_id='.$id;
-        return self::doJsonQuery($url);
+        $program = self::doJsonQuery($url);
+
+        // Figure out a RecTrac program_id, if we can
+        // RecTrac sessions are named as $id-$letter.
+        // So, if we convert the session code to an int, we should be left
+        // with the RecTrac ID as a number.
+        if (!empty($program['sessions'][0]['code'])) {
+            $rectrac_id = (int)$program['sessions'][0]['code'];
+            if ($rectrac_id) {
+                $program['rectrac_id'] = $rectrac_id;
+            }
+        }
+
+        return $program;
     }
 
     public static function locations()

@@ -12,17 +12,23 @@
 #}
 <div><p>{{ program.statement }}</p></div>
 {% if program.sessions %}
-<table>
-    {% for s in program.sessions %}
-    <tr><td>{{ s.code }}</td>
-        <td>{{ s.days }}</td>
-        <td>{{ s.start_date }} - {{ s.end_date }}</td>
-        <td>{{ s.start_end_time }}</td>
-        <td>{{ s.in_city_fees }}</td>
-        <td>{{ s.non_city_fees }}</td>
-        <td>{{ s.participant_age }}</td>
-        <td>{{ s.description }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    <table>
+        {% for s in program.sessions %}
+        <tr><td>{{ s.code }}</td>
+            <td>{{ s.days }}</td>
+            <td>{{ s.start_date }} - {{ s.end_date }}</td>
+            <td>{{ s.start_end_time }}</td>
+            <td>{{ s.in_city_fees }}</td>
+            <td>{{ s.non_city_fees }}</td>
+            <td>{{ s.participant_age }}</td>
+            <td>{{ s.description }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if program.rectrac_id %}
+    <a class="button"
+        href="https://webtrac.bloomington.in.gov/wbwsc/webtrac.wsc/search.html?sessionID=%3C?VSI-SessionID?%3E&amp;module=AR&amp;Primarycode={{ program.rectrac_id }}">
+        Enroll Now
+    </a>
+    {% endif %}
 {% endif %}
