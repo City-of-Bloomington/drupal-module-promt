@@ -22,6 +22,11 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class ProgramsBlock extends BlockBase implements BlockPluginInterface
 {
+    public function getCacheContexts()
+    {
+        return Cache::mergeContexts(parent::getCacheContexts(), ['url.path']);
+    }
+
     public function build()
     {
         $config = $this->getConfiguration();
@@ -37,7 +42,8 @@ class ProgramsBlock extends BlockBase implements BlockPluginInterface
                 if ($programs) {
                     return [
                         '#theme'    => 'promt_programs',
-                        '#programs' => $programs
+                        '#programs' => $programs,
+                        '#cache'    => ['max-age' => 3600]
                     ];
                 }
             }
