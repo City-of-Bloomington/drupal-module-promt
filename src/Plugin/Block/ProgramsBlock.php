@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright 2017 City of Bloomington, Indiana
+ * @copyright 2017-2018 City of Bloomington, Indiana
  * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
  */
 namespace Drupal\promt\Plugin\Block;
@@ -17,35 +17,38 @@ use Drupal\Core\Form\FormStateInterface;
  *     id = "promt_programs_block",
  *     admin_label = "Promt Programs",
  *     context = {
- *         "node" = @ContextDefinition("entity:node")
+ *         "node" = @ContextDefinition(
+ *             "entity:node",
+ *             label = "Current Node",
+ *             required = FALSE
+ *         )
  *     }
  * )
  */
 class ProgramsBlock extends BlockBase implements BlockPluginInterface
 {
-    public function getCacheContexts()
-    {
-        return Cache::mergeContexts(parent::getCacheContexts(), ['url.path']);
-    }
-
     public function build()
     {
-        $config = $this->getConfiguration();
         $node   = $this->getContextValue('node');
+        if ($node) {
+            $config    = $this->getConfiguration();
+            $fieldtype = $config['fieldtype'];
+            $fieldname = $config['fieldname'];
 
-        $fieldtype = $config['fieldtype'];
-        $fieldname = $config['fieldname'];
-
-        if ($node->hasField( $fieldname)) {
-            $id = $node->get($fieldname)->value;
-            if ($id) {
-                $programs = PromtService::programs([$fieldtype=>$id]);
-                if ($programs) {
-                    return [
-                        '#theme'    => 'promt_programs',
-                        '#programs' => $programs,
-                        '#cache'    => ['max-age' => 3600]
-                    ];
+            if ($node->hasField( $fieldname)) {
+                $id = $node->get($fieldname)->value;
+                if ($id) {
+                    $programs = PromtService::programs([$fieldtype=>$id]);
+                    if ($programs) {
+                        return [
+                            '#theme'    => 'promt_programs',
+                            '#programs' => $programs,
+                            '#cache'       => [
+                                'contexts' => ['route'],
+                                'max-age'  => 3600
+                            ]
+                        ];
+                    }
                 }
             }
         }
