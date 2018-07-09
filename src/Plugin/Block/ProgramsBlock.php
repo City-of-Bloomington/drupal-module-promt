@@ -11,6 +11,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Block\BlockPluginInterface;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * @Block(
@@ -27,10 +28,15 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class ProgramsBlock extends BlockBase implements BlockPluginInterface
 {
+    public function getCacheContexts()
+    {
+        return Cache::mergeContexts(parent::getCacheContexts(), ['url.path']);
+    }
+
     public function build()
     {
-        $node   = $this->getContextValue('node');
-        if ($node) {
+        $node = $this->getContextValue('node');
+        if ($node && $node instanceof Node) {
             $config    = $this->getConfiguration();
             $fieldtype = $config['fieldtype'];
             $fieldname = $config['fieldname'];
@@ -44,7 +50,6 @@ class ProgramsBlock extends BlockBase implements BlockPluginInterface
                             '#theme'    => 'promt_programs',
                             '#programs' => $programs,
                             '#cache'       => [
-                                'contexts' => ['route'],
                                 'max-age'  => 3600
                             ]
                         ];
