@@ -28,9 +28,11 @@
             <td>{{ s.days }}</td>
             <td>{{ s.start_date }} - {{ s.end_date }}</td>
             <td>{{ s.start_end_time }}</td>
-            <td>{{ s.in_city_fees }}</td>
-            <td>{{ s.non_city_fees }}</td>
-            <td>{{ s.participant_age }}</td>
+            {% if s.in_city_fees    %}<td>{{ s.in_city_fees    }}</td>{% endif %}
+            {% if s.non_city_fees   %}<td>{{ s.non_city_fees   }}</td>{% endif %}
+            {% if s.member_fees     %}<td>{{ s.member_fees     }}</td>{% endif %}
+            {% if s.non_member_fees %}<td>{{ s.non_member_fees }}</td>{% endif %}
+            {% if s.participant_age %}<td>{{ s.participant_age }}</td>{% endif %}
             <td>{{ s.description }}</td>
         </tr>
         {% endfor %}
