@@ -20,6 +20,13 @@
     {% if program.in_city_fees    %}<dt>In City Fees</dt>   <dd>{{ program.in_city_fees    }}</dd>{% endif %}
     {% if program.non_city_fees   %}<dt>Non City Fees</dt>  <dd>{{ program.non_city_fees   }}</dd>{% endif %}
     {% if program.participant_age %}<dt>Ages</dt>           <dd>{{ program.participant_age }}</dd>{% endif %}
+    {% if program.location %}
+    <dt>Location</dt>
+    <dd>{% if program.location_url %}<a href="{{ program.location_url }}">{{ program.location }}</a>
+        {% else %}{{ program.location }}
+        {% endif %}
+    </dd>
+    {% endif %}
 </dl>
 {% if program.sessions %}
     <table>
