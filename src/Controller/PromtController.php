@@ -9,6 +9,8 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Form\FormState;
 use Drupal\promt\PromtService;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 class PromtController extends ControllerBase
 {
     public function programs()
@@ -34,6 +36,10 @@ class PromtController extends ControllerBase
     public function program($id)
     {
         $program = PromtService::program((int)$id);
+
+        if (!$program) {
+            throw new NotFoundHttpException();
+        }
 
         return [
             '#theme'   => 'promt_program',

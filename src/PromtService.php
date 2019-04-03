@@ -46,7 +46,7 @@ class PromtService
         return $json;
     }
 
-    public static function programs(array $fields=null)
+    public static function programs(array $fields=null): array
     {
         $search = [];
         foreach (self::$fields as $drupalField => $promtField) {
@@ -57,10 +57,18 @@ class PromtService
         $params   = $search ? '?'.http_build_query($search) : '';
         $url      = self::getUrl().'/PromtService'.$params;
         $programs = self::doJsonQuery($url);
+        foreach ($programs as $i=>$p) {
+            if (empty($p['can_publish']) || !$p['can_publish']) {
+                unset($programs[$i]);
+            }
+        }
         return $programs;
     }
 
-    public static function program($id)
+    /**
+     * Returns information for a single program
+     */
+    public static function program(int $id): ?array
     {
         $url = self::getUrl().'/PromtService?program_id='.$id;
         $program = self::doJsonQuery($url);
@@ -76,7 +84,9 @@ class PromtService
             }
         }
 
-        return $program;
+        return !empty($program['can_publish']) && $program['can_publish']
+            ? $program
+            : null;
     }
 
     public static function locations()
