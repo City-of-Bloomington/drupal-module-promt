@@ -1,8 +1,9 @@
 ---
-name: Promt
-description: Integration with Parks and Recreation PROMT system
-package: COB
-type: module
-core: 8.x
-configure: promt.settings
+name:        'Promt'
+description: 'Integration with Parks and Recreation PROMT system'
+package:     'COB'
+type:        'module'
+core:        '8.x'
+configure:   'promt.settings'
+core_version_requirement: '^8||^9'
 ...

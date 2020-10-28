@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright 2017 City of Bloomington, Indiana
- * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
+ * @copyright 2017-2020 City of Bloomington, Indiana
+ * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE
  */
 namespace Drupal\promt\Form;
 
@@ -9,6 +9,7 @@ use Drupal\promt\PromtService;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 class ProgramSearchForm extends FormBase
 {
@@ -17,7 +18,7 @@ class ProgramSearchForm extends FormBase
     public function buildForm(array $form, FormStateInterface $form_state)
     {
         $form['#method'] = 'get';
-        $form['#action'] = $this->url('promt.programs');
+        $form['#action'] = Url::fromRoute('promt.programs')->toString();
 
         $categories = PromtService::categories();
         $options    = [];
