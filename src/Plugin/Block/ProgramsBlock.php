@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright 2017-2018 City of Bloomington, Indiana
- * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
+ * @copyright 2017-2021 City of Bloomington, Indiana
+ * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE
  */
 namespace Drupal\promt\Plugin\Block;
 
@@ -16,14 +16,7 @@ use Drupal\node\Entity\Node;
 /**
  * @Block(
  *     id = "promt_programs_block",
- *     admin_label = "Promt Programs",
- *     context = {
- *         "node" = @ContextDefinition(
- *             "entity:node",
- *             label = "Current Node",
- *             required = FALSE
- *         )
- *     }
+ *     admin_label = "Promt Programs"
  * )
  */
 class ProgramsBlock extends BlockBase implements BlockPluginInterface
@@ -35,7 +28,7 @@ class ProgramsBlock extends BlockBase implements BlockPluginInterface
 
     public function build()
     {
-        $node = $this->getContextValue('node');
+        $node = \Drupal::routeMatch()->getParameter('node');
         if ($node && $node instanceof Node) {
             $config    = $this->getConfiguration();
             $fieldtype = $config['fieldtype'];
