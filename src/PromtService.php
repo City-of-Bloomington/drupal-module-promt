@@ -1,7 +1,7 @@
 <?php
 /**
- * @copyright 2017 City of Bloomington, Indiana
- * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE.txt
+ * @copyright 2017-2020 City of Bloomington, Indiana
+ * @license http://www.gnu.org/licenses/agpl.txt GNU/AGPL, see LICENSE
  */
 namespace Drupal\promt;
 
@@ -10,7 +10,7 @@ use Drupal\Core\Site\Settings;
 class PromtService
 {
     /**
-     * Maps Drupal search input fields to PROMT query parameters
+     * Maps Drupal fields to PROMT query parameters
      *
      * Drupal fieldnames are the keys.
      * Promt fieldnames are the values
